@@ -49,7 +49,7 @@ function bookDetails(book) {
     likeBtn.dataset.id = book.id; // dataset is optional you can also use likeBtn.id instead
     likeBtn.addEventListener('click', (e) => {
 
-        likeThisBook(e, book)
+        likeThisBook(book)
         e.preventDefault() //it works but keeps refreshing
     });
     bookCard.append(bookName, bookImg, bookDescription, likeBtn);
@@ -61,18 +61,19 @@ function bookDetails(book) {
     book.users.forEach(bookUser => addUser(bookUser, usersUl));
     bookCard.append(usersUl);
 }
-
-function likeThisBook(e, book) {
-    let a  = {}
+// function likeThisBook(book) {
+//     book.users.push(allUsers[0])
+//     const ul = document.getElementById()
+// }
+function likeThisBook(book) {
     fetch(`http://localhost:3000/books/${e.target.dataset.id}`, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
+            Accept: "application/json"
         },
         body: JSON.stringify(book)
-    }).then(res => res(json))
-    .then(json => console.log(json))
-    
+    })
         
 }
 
