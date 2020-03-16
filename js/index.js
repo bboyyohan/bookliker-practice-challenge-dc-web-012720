@@ -58,20 +58,27 @@ function bookDetails(book) {
     bookContainer().innerHTML = ""
     bookContainer().append(bookCard);
     let usersUl = document.createElement('ul');
+    usersUl.classList.add("ul")
     book.users.forEach(bookUser => addUser(bookUser, usersUl));
     bookCard.append(usersUl);
 }
 
 function likeThisBook(e, book) {
-    let a  = {}
+    let ul = document.querySelector('.ul');
+    let allUsers = book.users
+    let userObject = {
+        id: 1,
+        username: "pouros"
+    }
+    allUsers.push(userObject);
     fetch(`http://localhost:3000/books/${e.target.dataset.id}`, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(book)
-    }).then(res => res(json))
-    .then(json => console.log(json))
+        body: JSON.stringify({users: allUsers})
+    }).then(res => res.json())
+    .then(json => addUser(userObject, ul))
     
         
 }
