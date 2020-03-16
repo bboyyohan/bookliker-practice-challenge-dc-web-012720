@@ -16,6 +16,8 @@ Then run the server with:
 json-server db.json
 ```
 
+
+
 This will serve your code on `http://localhost:3000`.
 
 ### Build the following application in Vanilla JS
